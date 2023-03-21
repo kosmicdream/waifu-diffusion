@@ -675,7 +675,7 @@ class EMAModel:
             for p in self.shadow_params
         ]
 
-def main():
+def main(device=device):
     rank = get_rank()
     world_size = get_world_size()
     torch.cuda.set_device(rank)
@@ -713,7 +713,7 @@ def main():
             print("No HF Token detected in arguments or enviroment variable, setting it to none (as in string)")
             args.hf_token = "none"
 
-    device = torch.device('cuda')
+#     device = torch.device('cuda')
 
     print("DEVICE:", device)
 
@@ -1052,5 +1052,7 @@ def main():
     print('Done!')
 
 if __name__ == "__main__":
-    setup()
-    main()
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    if device = 'cuda':
+        setup()
+    main(device)
